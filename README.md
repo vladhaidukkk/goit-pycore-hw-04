@@ -3,3 +3,12 @@
 - **Tier:** 1
 - **Discipline:** Python Programming: Foundations and Best Practices
 - **Homework:** 2
+
+## Getting Started
+
+1. Create and activate a vitrual environment: read [this](https://www.w3schools.com/python/python_virtualenv.asp) for details
+
+2. Install required dependencies:
+   ```shell
+   pip install -r requirements.txt
+   ```
