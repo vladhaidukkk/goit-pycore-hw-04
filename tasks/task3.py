@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-from rich import print
+from colorama import Fore, Style
 
 from tasks.utils import print_error
 
@@ -47,7 +47,7 @@ def print_dir(
     dir_name = str(dir_path) if depth == 0 else dir_path.name
     dir_empty_mark = " (empty)" if len(dir_items) == 0 else ""
     print(
-        f"{dir_padding}{dir_symbol}[bold blue]{dir_name}/[/bold blue]{dir_empty_mark}"
+        f"{dir_padding}{dir_symbol}{Fore.BLUE}{Style.BRIGHT}{dir_name}/{Style.RESET_ALL}{dir_empty_mark}"
     )
 
     for item_n, item in enumerate(dir_items, start=1):
@@ -64,7 +64,9 @@ def print_dir(
                 "   " if last_flag else "│  " for last_flag in prev_last_flags
             )
             file_symbol = "└──" if is_last_item else "├──"
-            print(f"{file_padding}{file_symbol}[green]{item.name}[/green]")
+            print(
+                f"{file_padding}{file_symbol}{Fore.GREEN}{item.name}{Style.RESET_ALL}"
+            )
 
 
 def main() -> None:

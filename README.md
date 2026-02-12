@@ -4,10 +4,6 @@
 - **Discipline:** Python Programming: Foundations and Best Practices
 - **Homework:** 2
 
-## Comments
-
-- Used `rich` instead of `colorama`
-
 ## Getting Started
 
 1. Create and activate a vitrual environment: read [this](https://www.w3schools.com/python/python_virtualenv.asp) for details

@@ -1,5 +1,5 @@
-from rich import print
+from colorama import Fore, Style
 
 
 def print_error(message: str) -> None:
-    print(f"[red]{message}[/red]")
+    print(f"{Fore.RED}{message}{Style.RESET_ALL}")
