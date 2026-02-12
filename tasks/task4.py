@@ -4,39 +4,35 @@ def parse_input(user_input: str) -> tuple[str, ...]:
     return cmd, *args
 
 
-def add_contact(args: tuple[str, ...], contacts: dict[str, str]) -> None:
+def add_contact(args: tuple[str, ...], contacts: dict[str, str]) -> bool:
     name, phone = args[0], args[1]
     if name in contacts:
-        print("Contact already exists.")
+        return False
     else:
         contacts[name] = phone
-        print("Contact added.")
+        return True
 
 
-def change_contact(args: tuple[str, ...], contacts: dict[str, str]) -> None:
+def change_contact(args: tuple[str, ...], contacts: dict[str, str]) -> bool:
     name, new_phone = args[0], args[1]
     if name in contacts:
         contacts[name] = new_phone
-        print("Contact updated.")
+        return True
     else:
-        print("Contact doesn't exist.")
+        return False
 
 
-def show_phone(args: tuple[str, ...], contacts: dict[str, str]) -> None:
+def show_phone(args: tuple[str, ...], contacts: dict[str, str]) -> str | None:
     name = args[0]
     if name in contacts:
         phone = contacts[name]
-        print(f"{name}: {phone}")
+        return f"{name}: {phone}"
     else:
-        print("Contact doesn't exist.")
+        return None
 
 
-def show_all(contacts: dict[str, str]) -> None:
-    if contacts:
-        for name, phone in contacts.items():
-            print(f"{name}: {phone}")
-    else:
-        print("No contacts.")
+def show_all(contacts: dict[str, str]) -> str:
+    return "\n".join(f"{name}: {phone}" for name, phone in contacts.items())
 
 
 def main() -> None:
@@ -55,13 +51,19 @@ def main() -> None:
             if command == "hello":
                 print("How can I help you?")
             elif command == "add":  # "add [name] [phone number]"
-                add_contact(args, contacts)
+                contact_added = add_contact(args, contacts)
+                print("Contact added." if contact_added else "Contact already exists.")
             elif command == "change":  # "change [name] [new phone number]"
-                change_contact(args, contacts)
+                contact_updated = change_contact(args, contacts)
+                print(
+                    "Contact updated." if contact_updated else "Contact doesn't exist."
+                )
             elif command == "phone":  # "phone [name]"
-                show_phone(args, contacts)
+                contact_phone = show_phone(args, contacts)
+                print(contact_phone or "Contact doesn't exist.")
             elif command == "all":
-                show_all(contacts)
+                all_contacts = show_all(contacts)
+                print(all_contacts or "No contacts.")
             else:
                 print("Invalid command.")
         except Exception:
